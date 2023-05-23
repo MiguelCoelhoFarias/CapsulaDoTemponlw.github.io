@@ -1,0 +1,185 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* o border box serve pra preservar e respeitar sempre o tamanho da borda, pra que não aja diminuição */
+} /* o * comanda todo o conteudo do site. */
+
+:root {
+    font-size: 14px;
+} /* O root é o que comanda toda a fonte do site. */
+
+/* Esse * serve para fazer um reset do box model do browser que já vem padrão */
+::-webkit-scrollbar {
+    width: 8px;
+    /* manipulando a barrinha de scroll do navegador */
+}
+::-webkit-scrollbar-track {
+    background-color: #2c2c31;
+    /* caminho que a barrinha percorre */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9e9ea0;
+    /* tracinho da barrinha de scroll */
+}
+
+@keyframes entering {
+     from {
+        opacity: 0;
+        transform: translateY(-200px);
+
+     }
+     to {
+        opacity: 1;
+        transform: translateY(0);
+     }
+     /* Essa keyframe é uma ferramenta de criar animações.
+     Basicamente eu fiz um sistema de opacidade e deslize do site com o conteudo "caindo". */
+}
+
+body {
+    background-color: #121215;
+    color: #EAEAEa;
+    font-family: 'Roboto', sans-serif;
+    /* fonte personalizada adicionada como link, la no index em head. */
+
+    display: grid;
+    grid-template-areas: "profile timeline";
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 100vh;
+
+}
+
+nav {
+    padding: 64px;
+    grid-area: timeline;
+    overflow-y: scroll;
+    animation: entering 0.7s ease-in-out;
+}
+/* tag de navegação */
+
+.memory {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 64px;
+/* 
+EXPLICANDO COISAS NOVAS:
+- O display mexe no comportamento dos elementos em relação ao seu tamanho (se são de linha, bloco, etc)
+- O flex é um valor que deixa um elemento ao lado do outro, no mesmo bloco;
+- O flex direction é a direção da organização a ser feita;
+-O valor atribuido column, significa que será em colunas, um abaixo do outro.
+- O gap cria uma distancia entre os elementos.
+*/
+
+}
+
+.memory small {
+/* lembrar sempre de usar . antes de chamar uma classe */
+color: #BEBEBF;
+font-size: 0.75rem;
+}
+
+.memory h1 {
+    font-size: 2rem;
+    color: #eaeaea;
+}
+
+.memory img {
+    width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+
+    transition: transform 0.3s ease-in-out;
+
+    /* 
+    EXPLICAÇÕES SOBRE COISAS NOVAS:
+    - esse object fit mexe com o comportamento da imagem. Esse valor em especifico faz com que ela tenha um comportamento de capa, vai dando zoom conforme o tamanho;
+    - o border radius faz com que se tenha borda arredondada, e se declara o valor do arredondamento;
+    - DETALHE: esta sendo manipulada somente a imagem que esta no bloco memory.
+    */
+
+
+}
+.memory:hover img{
+transform: scale(1.1);
+
+}
+
+.memory div {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.memory p {
+    font-size: 1.2rem;
+    color: #BEBEBF;
+    line-height: 28px;
+    /* line height é uma função que determina o espaço entre as linhas do texto a ser manipulado */
+}
+aside {
+    grid-area: profile;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    border-right: 1px solid;
+    border-image: linear-gradient(#727275, #2c2c31) 1;
+    background-image: url(./assets/background.svg);
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-image: auto 100;
+}
+
+aside img:nth-child(2) {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid transparent;
+    background: linear-gradient(#d39e33, #ed5636, #633bbc),
+    linear-gradient(#d39e33, #ed5636, #633bbc) border-box;
+    /* o gradiente é algo gradativo, uma função para fazer mudança gradativa
+    nesse caso esta sendo feita uma mudança na paleta de cores de forma gradativa. */
+}
+
+aside p {
+    font-size: 2rem;
+    text-align: center;
+    /* rem é uma medida de tamanho que se adequa a medida dada pelo root. */
+}
+
+aside span{
+    font-size: 0.75rem;
+    color: #9e9ea0;
+}
+
+aside * {
+    animation: entering 0.7s ease-in-out;
+}
+
+@media (max-width: 768px) {
+    :root {
+        font-size: 14px;
+    }
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: 0.2fr 0.8fr;
+        grid-template-areas: 
+        "profile"
+        "timeline";
+    }
+    aside {
+        border-right: none;
+        padding: 32px 12px;
+    }
+
+    nav {
+        overflow-y: visible;
+        padding: 22px;
+    }
+} /* Esse @media é uma ferramenta que permite deixar seu site responsivo a outros dispositivos, adequando dentro dele, em sistema de caixa, todo o conteudo do site. */
